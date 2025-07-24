@@ -37,6 +37,16 @@ export const GET_PRODUCTS_BY_CATEGORY = gql`
     }
   }
 `;
+export const GET_PRODUCT_BY_ID = gql`
+  query GetProductById($selectedProductId: String!) {
+    product(productId: $selectedProductId) {
+      title
+      price
+      description
+      images
+    }
+  }
+`;
 
 export const DELETE_PRODUCT = gql`
   mutation DeleteProduct($id: String!) {

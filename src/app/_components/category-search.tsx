@@ -62,7 +62,7 @@ const Search = ({ selectedCategoryId, selectedCategoryName }: SearchProps) => {
             key={product.id}
             price={product.price}
             title={product.title}
-            image={product.images?.[0] || "/photo.png"}
+            image={product.images?.[0] || product.image?.[1]}
             productId={product.id}
             category={product.category}
             bagCount={bagMap[product.id] || 0}

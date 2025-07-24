@@ -47,7 +47,7 @@ const BagCard = ({
   };
 
   return (
-    <div className=" w-full  bg-[#F3F3F3]  p-[12px] flex flex-row justify-between items-center">
+    <div className=" w-full  bg-white rounded-[12px]  p-[12px] flex flex-row justify-between items-center mb-[1px]  shadow-sm hover:shadow-md duration-300 cursor-pointer">
       <Image
         src={image || "/photo.png"}
         alt={title}
@@ -70,7 +70,7 @@ const BagCard = ({
           </button>
           <button
             onClick={() => handleCount(false)}
-            className="w-[32px] h-[30px] bg-white rounded-[12px] text-[25px] flex items-center justify-center pb-1 hover:bg-gray-300 duration-300"
+            className="w-[32px] h-[30px] bg-gray-200 rounded-[12px] text-[25px] flex items-center justify-center pb-1 hover:bg-gray-300 duration-300"
           >
             -
           </button>
