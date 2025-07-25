@@ -1,29 +1,30 @@
-"use client";
-
 import { useQuery } from "@apollo/client";
 import client from "@/lib/apollo-client";
 import { GET_PRODUCTS } from "@/app/graphql/products";
-
 import Card from "./card";
 import Searchinput from "./search";
-import { useState, useCallback } from "react";
+import { useState } from "react";
+import { useBag } from "./bag-context";
 
 export interface SearchProps {
   selectedCategoryId: string | null;
   selectedCategoryName?: string | null;
 }
 
-const Search = ({ selectedCategoryId, selectedCategoryName }: SearchProps) => {
+const categorySearch = ({ selectedCategoryId, selectedCategoryName }: SearchProps) => {
   const { data, loading, error } = useQuery(GET_PRODUCTS, { client });
-  const [bagMap, setBagMap] = useState<{ [productId: string]: number }>({});
+  const { bagItems, addToBag, removeFromBag } = useBag();
   const [searchValue, setSearchValue] = useState("");
 
-  const handleBagChange = useCallback(
-    async (productId: string, count: number) => {
-      setBagMap((prev) => ({ ...prev, [productId]: count }));
-    },
-    []
-  );
+  const handleBagChange = (productId: string, count: number) => {
+    const current =
+      bagItems.find((item) => item.id === productId)?.quantity || 0;
+    if (count > current) {
+      addToBag(productId);
+    } else if (count < current) {
+      removeFromBag(productId);
+    }
+  };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -51,7 +52,7 @@ const Search = ({ selectedCategoryId, selectedCategoryName }: SearchProps) => {
     <div className="w-full flex flex-col gap-[24px]  bg-gray-200">
       <div className="w-[100%] h-[84px] flex flex-row items-center justify-between p-[24px] rounded-[16px] bg-white">
         <p className="font-semibold text-[18px]">
-          {selectedCategoryName || "All Category"}
+          {selectedCategoryName}
         </p>
         <Searchinput onChange={handleSearchChange} defaultValue={searchValue} />
       </div>
@@ -62,10 +63,12 @@ const Search = ({ selectedCategoryId, selectedCategoryName }: SearchProps) => {
             key={product.id}
             price={product.price}
             title={product.title}
-            image={product.images?.[0] || product.image?.[1]}
+            image={product.images?.[0]}
             productId={product.id}
             category={product.category}
-            bagCount={bagMap[product.id] || 0}
+            bagCount={
+              bagItems.find((item) => item.id === product.id)?.quantity || 0
+            }
             onBagChange={handleBagChange}
           />
         ))}
@@ -74,4 +77,4 @@ const Search = ({ selectedCategoryId, selectedCategoryName }: SearchProps) => {
   );
 };
 
-export default Search;
+export default categorySearch;

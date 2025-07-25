@@ -1,7 +1,6 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { useBag } from "./bag-context";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 interface CardProps {
@@ -17,10 +16,18 @@ interface CardProps {
   onBagChange?: (productId: string, count: number) => void;
 }
 
-const Card = ({ price, title, image, productId, bagCount = 0, onBagChange }: CardProps) => {
+const Card = ({
+  price,
+  title,
+  image,
+  productId,
+  bagCount = 0,
+  onBagChange,
+}: CardProps) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(bagCount > 0);
   const [bag, setbag] = useState(bagCount);
   const { addToBag, removeFromBag } = useBag();
+  const router = useRouter();
 
   useEffect(() => {
     setbag(bagCount);
@@ -33,7 +40,6 @@ const Card = ({ price, title, image, productId, bagCount = 0, onBagChange }: Car
     if (bag === 0) {
       addToBag(productId);
     }
-    onBagChange && onBagChange(productId, bag + 1);
   };
 
   const handleCount = (isAdd: boolean) => {
@@ -70,11 +76,12 @@ const Card = ({ price, title, image, productId, bagCount = 0, onBagChange }: Car
       </div>
 
       <Image
+        onClick={() => router.push(`/card-detail/${productId}`)}
         src={image || "/photo.png"}
         alt={title}
         width={196}
         height={196}
-        className="w-[196px] h-[196px] rounded-[12px] object-cover"
+        className="w-[196px] h-[196px] rounded-[12px] object-cover cursor-pointer"
       />
       <div className="max-w-[196px] flex flex-col gap-[4px] p-[8px]">
         <p className="font-bold font-Inter text-[16px]">{price}$</p>

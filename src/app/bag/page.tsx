@@ -38,8 +38,8 @@ const Bag = () => {
             ({bagProducts.length} бараа)
           </p>
         </div>
-        <div className="w-full flex flex-row items-center justify-between">
-          <div className="w-3/4 flex flex-row items-center gap-8 overflow-y-auto py-8">
+        <div className="w-full flex flex-row justify-between">
+          <div className="w-3/4 flex flex-row items-center gap-8 py-8">
             <div className="w-full flex flex-col items-center justify-center rounded-[12px] bg-gray-100 p-2 shadow-sm">
               {bagProducts.map((product: any) => {
                 const bagItem = bagItems.find((item) => item.id === product.id);
@@ -61,7 +61,7 @@ const Bag = () => {
               })}
             </div>
           </div>
-          <div className="flex flex-col w-[20%] bg-white rounded-[12px] justify-center items-center p-4 shadow-sm gap-5">
+          <div className="flex flex-col w-[20%] h-[168px] bg-white rounded-[12px] justify-center items-center p-4 shadow-sm gap-5 mt-9">
             <button className="cursor-pointer w-[90%] h-[40px] bg-[#0AAD0A] flex items-center justify-center text-white font-semibold text-[16px] rounded-[12px]">Захиалах</button>
             <div className="w-[90%] h-[42px]">
               <p className="font-medium text-[14px] flex flex-row items-center justify-center gap-3">Захиалгын дүн 

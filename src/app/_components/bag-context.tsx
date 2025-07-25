@@ -12,6 +12,7 @@ type BagContextType = {
   addToBag: (id: string) => void;
   removeFromBag: (id: string) => void;
   bagCount: number;
+  uniqueBagCount: number;
 };
 
 const BagContext = createContext<BagContextType | undefined>(undefined);
@@ -53,6 +54,7 @@ export const BagProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const bagCount = bagItems.reduce((sum, item) => sum + item.quantity, 0);
+  const uniqueBagCount = bagItems.length;
 
   return (
     <BagContext.Provider
@@ -61,6 +63,7 @@ export const BagProvider = ({ children }: { children: ReactNode }) => {
         addToBag,
         removeFromBag,
         bagCount,
+        uniqueBagCount,
       }}
     >
       {children}

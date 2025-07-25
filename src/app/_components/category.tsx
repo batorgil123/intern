@@ -1,6 +1,4 @@
-"use client";
-
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import CategoryNames from "./category-names";
 import { useQuery } from "@apollo/client";
 import client from "@/lib/apollo-client";
@@ -11,12 +9,12 @@ const Category = ({
 }: {
   onSelectCategory: (id: string, name: string) => void;
 }) => {
-  const { data, loading, error } = useQuery(GET_CATEGORIES, { client });
+  const { data, error } = useQuery(GET_CATEGORIES, { client });
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
 
   const categories = data?.categories || [];
 
-  if (loading) return <p>Уншиж байна...</p>;
+  if (!data) return <p>Уншиж байна...</p>;
   if (error) return <p>{error.message}</p>;
 
   return (

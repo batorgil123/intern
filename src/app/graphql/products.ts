@@ -38,8 +38,8 @@ export const GET_PRODUCTS_BY_CATEGORY = gql`
   }
 `;
 export const GET_PRODUCT_BY_ID = gql`
-  query GetProductById($selectedProductId: String!) {
-    product(productId: $selectedProductId) {
+  query GetProductById($id: String!) {
+    product(id: $id) {
       title
       price
       description
