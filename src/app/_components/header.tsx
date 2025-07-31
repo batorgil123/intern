@@ -14,7 +14,6 @@ const Header = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Login status шалгах
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("userEmail");
     if (token && email) {

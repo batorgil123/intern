@@ -41,7 +41,7 @@ const Login = () => {
 
       if (data?.login?.access_token) {
         localStorage.setItem("token", data.login.access_token);
-        localStorage.setItem("userEmail", email); // add this line
+        localStorage.setItem("userEmail", email);
         setShowSuccessDialog(true);
       }
     } catch (err: unknown) {

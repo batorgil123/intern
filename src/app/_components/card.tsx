@@ -28,8 +28,6 @@ const Card = ({
   const { cartItems, addToCart, updateQuantity } = useCart();
   const [isButtonDisabled, setIsButtonDisabled] = useState(bagCount > 0);
   const [bag, setbag] = useState(bagCount);
-
-  // Find current item in cart
   const currentCartItem = cartItems.find((item: any) => item.id === productId);
   const currentBagCount = currentCartItem ? currentCartItem.quantity : 0;
 
@@ -44,7 +42,7 @@ const Card = ({
       title: title,
       price: price,
       image: image,
-      quantity: 1
+      quantity: 1,
     };
 
     addToCart(cartItem);
