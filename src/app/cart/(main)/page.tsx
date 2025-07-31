@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useCart } from "@/lib/utils";
-import { AlertCircleIcon, CheckCircle2Icon, PopcornIcon } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,

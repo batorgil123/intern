@@ -40,8 +40,7 @@ const Login = () => {
       });
 
       if (data?.login?.access_token) {
-        localStorage.setItem("token", data.login.access_token);
-        localStorage.setItem("userEmail", email);
+        localStorage.setItem("access_token", data.login.access_token);
         setShowSuccessDialog(true);
       }
     } catch (err: unknown) {

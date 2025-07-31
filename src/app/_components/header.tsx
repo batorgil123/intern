@@ -13,15 +13,17 @@ const Header = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("access_token");
     if (token) {
       setIsLoggedIn(true);
     }
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
     localStorage.removeItem("cartItems");
+    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("userEmail");
     setIsLoggedIn(false);
     router.push("/login");
   };
@@ -51,7 +53,7 @@ const Header = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors cursor-pointer"
             >
               <LogOut size={16} />
               Гарах
@@ -60,7 +62,7 @@ const Header = () => {
         ) : (
           <Link
             href="/login"
-            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors cursor-pointer"
           >
             <LogIn size={16} />
             Нэвтрэх
