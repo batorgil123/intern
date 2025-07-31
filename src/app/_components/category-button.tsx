@@ -15,7 +15,7 @@ export default function CategoryButton({ names }: CategoryButtonProps) {
       {names.map((category, index) => (
         <Link
           key={category.id || index}
-          href={`/main/${category.id}`}
+          href={`/checkout/${category.id}`}
           className="w-[344px] h-[40px] flex text-[16px] text-[#7E7E83] pl-3 bg-white hover:bg-gray-100 duration-300 justify-start items-center shadow-none focus:bg-[#F4F4F4] focus:text-black cursor-pointer rounded-md"
         >
           {category.name}

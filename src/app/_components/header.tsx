@@ -1,7 +1,7 @@
 "use client";
 
 import Freshpackheader from "../icons/freshpack-header-icon";
-import { ShoppingCart, LogIn, LogOut, User } from "lucide-react";
+import { ShoppingCart, LogIn, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -10,30 +10,25 @@ import { useCart } from "@/lib/utils";
 const Header = () => {
   const { cartCount } = useCart();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const email = localStorage.getItem("userEmail");
-    if (token && email) {
+    if (token) {
       setIsLoggedIn(true);
-      setUserEmail(email);
     }
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("userEmail");
     localStorage.removeItem("cartItems");
     setIsLoggedIn(false);
-    setUserEmail("");
     router.push("/login");
   };
 
   return (
     <div className="px-[2%] bg-white w-full h-[68px] flex items-center justify-between border-b-[1px] border-[#E2E2E3]">
-      <Link href={isLoggedIn ? "/main" : "/login"} className="cursor-pointer">
+      <Link href={isLoggedIn ? "/checkout" : "/login"} className="cursor-pointer">
         <Freshpackheader />
       </Link>
       
@@ -54,10 +49,6 @@ const Header = () => {
         
         {isLoggedIn ? (
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <User size={16} />
-              <span>{userEmail}</span>
-            </div>
             <button
               onClick={handleLogout}
               className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"

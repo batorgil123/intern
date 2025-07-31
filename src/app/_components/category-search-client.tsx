@@ -1,7 +1,7 @@
 "use client";
 
 import Card from "./card";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Search } from "lucide-react";
 import { useCart } from "@/lib/utils";
 

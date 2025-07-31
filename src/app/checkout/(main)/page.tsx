@@ -1,7 +1,7 @@
-import CategoryButton from "../_components/category-button";
+import CategoryButton from "../../_components/category-button";
 import client from "@/lib/apollo-client";
 import { GET_CATEGORIES } from "@/app/graphql/products";
-import CategorySearch from "../_components/category-search";
+import CategorySearch from "../../_components/category-search";
 
 async function fetchData() {
   try {

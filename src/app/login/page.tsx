@@ -54,7 +54,7 @@ const Login = () => {
 
   const handleSuccessDialogClose = () => {
     setShowSuccessDialog(false);
-    router.push("/main");
+    router.push("/checkout");
   };
 
   return (
