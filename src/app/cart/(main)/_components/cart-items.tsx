@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useCart } from "@/lib/utils";
+import { Trash2 } from "lucide-react";
 
 interface CartItem {
   id: string;
@@ -54,23 +55,25 @@ export default function CartItems() {
                 height={80}
                 className="rounded-[8px] object-cover"
               />
-              <div>
-                <h3 className="font-semibold text-[16px]">
-                  {item.title}
-                </h3>
-                <p className="text-[14px] text-gray-600">
-                  {item.price}$
-                </p>
+              <div className="flex flex-col gap-2 pb-4">
+                <p className="text-[16px] font-semibold pb-3">{item.price}$</p>
+                <h3 className="font-semibold text-[16px]">{item.title}</h3>
               </div>
             </div>
 
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
+                <Trash2
+                  onClick={() => handleRemoveItem(item.id)}
+                  className="border border-gray-200  p-1 rounded-md hover:bg-gray-200 duration-300 cursor-pointer mr-10"
+                  size={32}
+                />
+
                 <button
                   onClick={() =>
                     handleUpdateQuantity(item.id, item.quantity - 1)
                   }
-                  className="w-[32px] h-[32px] bg-gray-200 rounded-[8px] flex items-center justify-center hover:bg-gray-300"
+                  className="w-[32px] h-[32px] border border-gray-200  rounded-[8px] flex items-center justify-center hover:bg-gray-300 cursor-pointer pb-[6px]  text-[30px]"
                 >
                   -
                 </button>
@@ -81,22 +84,15 @@ export default function CartItems() {
                   onClick={() =>
                     handleUpdateQuantity(item.id, item.quantity + 1)
                   }
-                  className="w-[32px] h-[32px] bg-green-500 text-white rounded-[8px] flex items-center justify-center hover:bg-green-600"
+                  className="w-[32px] h-[32px] bg-green-500 text-white rounded-[8px] flex items-center justify-center hover:bg-green-600 cursor-pointer pb-[6px]  text-[30px]"
                 >
                   +
                 </button>
               </div>
-
-              <button
-                onClick={() => handleRemoveItem(item.id)}
-                className="text-red-500 hover:text-red-700 font-semibold"
-              >
-                Устгах
-              </button>
             </div>
           </div>
         ))
       )}
     </div>
   );
-} 
+}

@@ -6,14 +6,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/utils";
 import { useState, useEffect } from "react";
+import CartItems from "../cart/(main)/_components/cart-items";
 
 const Header = () => {
-  const { cartCount } = useCart();
+  const { cartItems } = useCart();
   const router = useRouter();
   const [access_token, setAccessToken] = useState<string | null>(null);
-
   useEffect(() => {
     const access_token = localStorage.getItem("access_token") || null;
+
     setAccessToken(access_token);
   }, []);
 
@@ -33,16 +34,16 @@ const Header = () => {
         <Freshpackheader />
       </Link>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 ">
         {access_token && (
           <Link
             href={"/cart"}
-            className="relative w-[56px] h-[36px] flex items-center justify-center bg-gray-200 rounded-full gap-[4px] border-[2px] border-gray-300 cursor-pointer"
+            className="pl-1 w-[56px] h-[36px] flex items-center justify-center bg-gray-200 rounded-full gap-[4px] border-[2px] border-gray-300 cursor-pointer"
           >
             <ShoppingCart className="p-0" size={16} />
-            {cartCount > 0 && (
-              <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                {cartCount}
+            {cartItems.length > 0 && (
+              <div className=" text-sm rounded-full w-5 h-5 flex items-center justify-center font-semibold">
+                {cartItems.length}
               </div>
             )}
           </Link>

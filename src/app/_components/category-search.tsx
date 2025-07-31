@@ -1,6 +1,7 @@
 import client from "@/lib/apollo-client";
 import { GET_PRODUCTS } from "@/app/graphql/products";
 import CategorySearchClient from "./category-search-client";
+import { Suspense } from "react";
 
 interface Product {
   id: string;
@@ -37,11 +38,13 @@ const CategorySearch = async ({
   const products = await fetchProducts();
 
   return (
-    <CategorySearchClient
-      products={products}
-      selectedCategoryId={selectedCategoryId}
-      selectedCategoryName={selectedCategoryName}
-    />
+    <Suspense fallback={<div>Loading products...</div>}>
+      <CategorySearchClient
+        products={products}
+        selectedCategoryId={selectedCategoryId}
+        selectedCategoryName={selectedCategoryName}
+      />
+    </Suspense>
   );
 };
 
