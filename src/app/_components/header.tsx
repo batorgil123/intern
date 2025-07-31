@@ -3,39 +3,38 @@
 import Freshpackheader from "../icons/freshpack-header-icon";
 import { ShoppingCart, LogIn, LogOut } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/utils";
+import { useState, useEffect } from "react";
 
 const Header = () => {
   const { cartCount } = useCart();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
+  const [access_token, setAccessToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (token) {
-      setIsLoggedIn(true);
-    }
+    const access_token = localStorage.getItem("access_token") || null;
+    setAccessToken(access_token);
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
-    localStorage.removeItem("cartItems");
     localStorage.removeItem("refresh_token");
-    localStorage.removeItem("userEmail");
-    setIsLoggedIn(false);
+    setAccessToken(null);
     router.push("/login");
   };
 
   return (
     <div className="px-[2%] bg-white w-full h-[68px] flex items-center justify-between border-b-[1px] border-[#E2E2E3]">
-      <Link href={isLoggedIn ? "/checkout" : "/login"} className="cursor-pointer">
+      <Link
+        href={access_token ? "/checkout" : "/login"}
+        className="cursor-pointer"
+      >
         <Freshpackheader />
       </Link>
-      
+
       <div className="flex items-center gap-4">
-        {isLoggedIn && (
+        {access_token && (
           <Link
             href={"/cart"}
             className="relative w-[56px] h-[36px] flex items-center justify-center bg-gray-200 rounded-full gap-[4px] border-[2px] border-gray-300 cursor-pointer"
@@ -48,8 +47,8 @@ const Header = () => {
             )}
           </Link>
         )}
-        
-        {isLoggedIn ? (
+
+        {access_token ? (
           <div className="flex items-center gap-3">
             <button
               onClick={handleLogout}

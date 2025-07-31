@@ -17,7 +17,7 @@ async function fetchCategories() {
 }
 
 const Page = async (props: { params: { categoryId: string } }) => {
-  const { categoryId } = props.params;
+  const { categoryId } = await props.params;
   const categories = await fetchCategories();
   const selectedCategory = categories.find(
     (cat: { id: string; name: string }) => cat.id === categoryId

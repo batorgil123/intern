@@ -41,6 +41,7 @@ const Login = () => {
 
       if (data?.login?.access_token) {
         localStorage.setItem("access_token", data.login.access_token);
+        localStorage.setItem("refresh_token", data.login.refresh_token);
         setShowSuccessDialog(true);
       }
     } catch (err: unknown) {
@@ -49,11 +50,6 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleSuccessDialogClose = () => {
-    setShowSuccessDialog(false);
-    router.push("/checkout");
   };
 
   return (
@@ -109,7 +105,7 @@ const Login = () => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={handleSuccessDialogClose}>
+            <AlertDialogAction onClick={() => router.push("/checkout")}>
               Хаах
             </AlertDialogAction>
           </AlertDialogFooter>
