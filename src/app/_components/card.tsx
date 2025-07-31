@@ -1,7 +1,8 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { useBag } from "./bag-context";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useCart } from "@/lib/utils";
 
 interface CardProps {
   price: number | string;
@@ -24,50 +25,57 @@ const Card = ({
   bagCount = 0,
   onBagChange,
 }: CardProps) => {
+  const { cartItems, addToCart, updateQuantity } = useCart();
   const [isButtonDisabled, setIsButtonDisabled] = useState(bagCount > 0);
   const [bag, setbag] = useState(bagCount);
-  const { addToBag, removeFromBag } = useBag();
-  const router = useRouter();
+
+  // Find current item in cart
+  const currentCartItem = cartItems.find((item: any) => item.id === productId);
+  const currentBagCount = currentCartItem ? currentCartItem.quantity : 0;
 
   useEffect(() => {
-    setbag(bagCount);
-    setIsButtonDisabled(bagCount > 0);
-  }, [bagCount]);
+    setbag(currentBagCount);
+    setIsButtonDisabled(currentBagCount > 0);
+  }, [currentBagCount]);
 
-  const handleClick = () => {
+  const handleAddToCart = () => {
+    const cartItem = {
+      id: productId,
+      title: title,
+      price: price,
+      image: image,
+      quantity: 1
+    };
+
+    addToCart(cartItem);
     setIsButtonDisabled(true);
-    setbag(bag + 1);
-    if (bag === 0) {
-      addToBag(productId);
+    setbag(1);
+
+    if (onBagChange) {
+      onBagChange(productId, 1);
     }
   };
 
   const handleCount = (isAdd: boolean) => {
     if (isAdd) {
-      setbag(bag + 1);
-      if (bag === 0) {
-        addToBag(productId);
-      }
-      onBagChange && onBagChange(productId, bag + 1);
-    } else if (bag > 0) {
-      setbag(bag - 1);
-      if (bag - 1 === 0) {
-        removeFromBag(productId);
-      }
-      onBagChange && onBagChange(productId, bag - 1);
-    } else if (bag == 0) {
-      setIsButtonDisabled(false);
+      updateQuantity(productId, currentBagCount + 1);
+      setbag(currentBagCount + 1);
+      onBagChange && onBagChange(productId, currentBagCount + 1);
+    } else if (currentBagCount > 0) {
+      updateQuantity(productId, currentBagCount - 1);
+      setbag(currentBagCount - 1);
+      onBagChange && onBagChange(productId, currentBagCount - 1);
     }
   };
 
   return (
-    <div className="relative w-[220px]  bg-[#F3F3F3] rounded-[20px] p-[12px] flex flex-col justify-between">
+    <div className="relative w-[220px] bg-[#F3F3F3] rounded-[20px] p-[12px] flex flex-col justify-between">
       <div
-        hidden={!isButtonDisabled || bag == 0}
+        hidden={!isButtonDisabled || bag === 0}
         className="absolute w-[196px] h-[196px] rounded-[12px] flex items-center justify-center bg-black opacity-[0.3]"
       ></div>
       <div
-        hidden={!isButtonDisabled || bag == 0}
+        hidden={!isButtonDisabled || bag === 0}
         className="absolute z-10 w-[196px] h-[196px] flex items-center justify-center bg-none"
       >
         <p className="absolute z-10 text-white font-semibold text-[40px]">
@@ -76,7 +84,6 @@ const Card = ({
       </div>
 
       <Image
-        onClick={() => router.push(`/card-detail/${productId}`)}
         src={image || "/photo.png"}
         alt={title}
         width={196}
@@ -90,14 +97,14 @@ const Card = ({
 
       <button
         hidden={isButtonDisabled && bag > 0}
-        onClick={handleClick}
+        onClick={handleAddToCart}
         className="bg-white cursor-pointer rounded-[12px] w-[196px] h-[40px] flex items-center justify-center text-[16px] font-semibold font-Inter p-[10px] gap-[4px] hover:bg-gray-200 duration-300"
       >
         Сагслах
       </button>
 
       <div
-        hidden={!isButtonDisabled || bag == 0}
+        hidden={!isButtonDisabled || bag === 0}
         className="w-full h-[40px] flex items-center justify-between p-2"
       >
         <button
@@ -108,7 +115,7 @@ const Card = ({
         </button>
         <button
           onClick={() => handleCount(true)}
-          className="w-[40px] h-[35px] bg-[#0AAD0A] rounded-[12px] text-[25px] text-white flex items-center justify-center pb-1 hover:bg-yellow-500 duration-300 "
+          className="w-[40px] h-[35px] bg-[#0AAD0A] rounded-[12px] text-[25px] text-white flex items-center justify-center pb-1 hover:bg-yellow-500 duration-300"
         >
           +
         </button>

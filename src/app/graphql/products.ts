@@ -26,10 +26,13 @@ export const GET_CATEGORIES = gql`
 `;
 
 export const GET_PRODUCTS_BY_CATEGORY = gql`
-  query GetProductsByCategory($selectedCategoryId: String!) {
-    products(categoryId: $selectedCategoryId) {
+  query GetProductsByCategory($categoryId: ID!) {
+    products (categoryId: $categoryId) {
+      id
       title
       price
+      images
+      description
       category {
         id
         name
