@@ -53,12 +53,14 @@ const Page = async (props: {
           </p>
         </div>
         <div className="w-[20%] flex flex-col p-5 bg-white rounded-[16px] gap-[24px] h-fit">
-          <p className="font-bold text-[24px] font-inter pl-7">{product.price}$</p>
+          <p className="font-bold text-[24px] font-inter pl-7">
+            {product.price}$
+          </p>
           <div className="flex flex-col gap-[16px] items-center w-full h-fit">
-            <button className="bg-[#0AAD0A] text-white rounded-[12px] h-[50px] w-[85%] hover:bg-[#0AAD0A]/90 transition duration-300 ease-in-out font-semibold font-inter">
+            <button className="bg-[#0AAD0A] text-white rounded-[12px] h-[50px] w-[85%] hover:bg-[#0AAD0A]/80 transition duration-300 ease-in-out font-semibold font-inter cursor-pointer">
               Сагслах
             </button>
-            <button className="border border-gray-300 rounded-[12px] h-[50px] w-[85%] hover:bg-gray-200 transition duration-300 ease-in-out font-semibold font-inter">
+            <button className="border border-gray-300 rounded-[12px] h-[50px] w-[85%] hover:bg-gray-200 transition duration-300 ease-in-out font-semibold font-inter cursor-pointer">
               Шууд авах
             </button>
           </div>
@@ -72,13 +74,15 @@ const Page = async (props: {
               key={item.id}
               className="flex flex-col gap-[16px] items-start w-[220px]"
             >
-              <Image
-                src={item.images[0] || "/photo.png"}
-                alt={item.title}
-                width={196}
-                height={196}
-                className="rounded-[12px] h-[196px] w-[196px] cursor-pointer"
-              />
+              <a href={`/checkout/${categoryId}/${item.id}`}>
+                <Image
+                  src={item.images[0] || "/photo.png"}
+                  alt={item.title}
+                  width={196}
+                  height={196}
+                  className="rounded-[12px] h-[196px] w-[196px] cursor-pointer"
+                />
+              </a>
               <p className="font-bold font-inter text-[16px] ">{item.price}$</p>
               <p className="text-[16px] font-inter font-regular">
                 {item.title}
