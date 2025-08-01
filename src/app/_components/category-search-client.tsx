@@ -52,9 +52,9 @@ const CategorySearchClient = ({
   }
 
   return (
-    <div className="w-full flex flex-col gap-[24px] bg-gray-200">
-      <div className="w-[100%] h-[84px] flex flex-row items-center justify-between p-[24px] rounded-[16px] bg-white">
-        <p className="font-semibold text-[18px]">
+    <div className="w-full flex flex-col gap-[24px] bg-[#F4F4F4]">
+      <div className="w-[100%] h-[84px] flex flex-row items-center justify-between p-[24px] rounded-[16px] bg-white ">
+        <p className="font-bold font-inter text-[18px]">
           {selectedCategoryName || "All Products"}
         </p>
         <div className="w-[300px] h-[36px] rounded-[10px] bg-white flex flex-row justify-between items-center p-[8px] border border-gray-300 gap-3">
@@ -68,7 +68,7 @@ const CategorySearchClient = ({
         </div>
       </div>
 
-      <div className="w-[100%] bg-white rounded-[16px] flex flex-wrap gap-[24px] p-[24px]">
+      <div className="w-[100%] bg-white rounded-[16px] flex flex-wrap gap-[30px] p-[24px] flex pl-15">
         {filteredProducts.length === 0 ? (
           <p className="text-gray-500">No products found.</p>
         ) : (

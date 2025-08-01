@@ -105,7 +105,7 @@ const Login = () => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={() => router.push("/checkout")}>
+            <AlertDialogAction onClick={() => router.push("/checkout/1")}>
               Хаах
             </AlertDialogAction>
           </AlertDialogFooter>

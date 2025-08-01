@@ -24,12 +24,14 @@ const Page = async (props: { params: { categoryId: string } }) => {
   );
 
   return (
-    <div className="w-full bg-gray-200 p-[24px] flex flex-row justify-between gap-[24px]">
-      <div className="w-[368px] h-[700px] flex flex-col bg-white rounded-[16px] p-3">
-        <p className="font-semibold text-[16px] mb-4">Ангилал</p>
-        <CategoryButton names={categories} />
+    <div className="w-full bg-[#F4F4F4] p-[24px] flex flex-row justify-between gap-[24px] pl-5">
+      <div className="w-[368px] max-h-[700px] flex flex-col bg-white rounded-[16px] p-3">
+        <p className="font-semibold text-[16px] font-inter mb-4">Ангилал</p>
+        <Suspense fallback={<div>Loading...</div>}>
+          <CategoryButton names={categories} currentCategoryId={categoryId} />
+        </Suspense>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 bg-[#F4F4F4]">
         <Suspense fallback={<div>Loading...</div>}>
           <CategorySearch
             selectedCategoryId={categoryId}

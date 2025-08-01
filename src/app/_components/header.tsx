@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/lib/utils";
 import { useState, useEffect } from "react";
-import CartItems from "../cart/(main)/_components/cart-items";
 
 const Header = () => {
   const { cartItems } = useCart();
@@ -28,7 +27,7 @@ const Header = () => {
   return (
     <div className="px-[2%] bg-white w-full h-[68px] flex items-center justify-between border-b-[1px] border-[#E2E2E3]">
       <Link
-        href={access_token ? "/checkout" : "/login"}
+        href={access_token ? "/checkout/1" : "/login"}
         className="cursor-pointer"
       >
         <Freshpackheader />

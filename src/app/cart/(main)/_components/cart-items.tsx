@@ -57,11 +57,11 @@ export default function CartItems() {
               />
               <div className="flex flex-col gap-2 pb-4">
                 <p className="text-[16px] font-semibold pb-3">{item.price}$</p>
-                <h3 className="font-semibold text-[16px]">{item.title}</h3>
+                <h3 className="font-regular font-inter text-[16px]">{item.title}</h3>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 mt-[5%]">
               <div className="flex items-center gap-2">
                 <Trash2
                   onClick={() => handleRemoveItem(item.id)}

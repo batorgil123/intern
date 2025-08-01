@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useCart } from "@/lib/utils";
+import { Suspense } from "react";
 
 interface CardProps {
   price: number | string;
