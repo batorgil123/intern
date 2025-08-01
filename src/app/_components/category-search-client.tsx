@@ -85,7 +85,7 @@ const CategorySearchClient = ({
                 productId={product.id}
                 category={product.category || { id: "", name: "" }}
                 bagCount={bagCount}
-                onBagChange={() => {}} // This is no longer needed as we use the hook
+                onBagChange={() => {}}
               />
             );
           })

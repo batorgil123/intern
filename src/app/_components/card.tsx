@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useCart } from "@/lib/utils";
-import { Suspense } from "react";
+import Link from "next/link";
 
 interface CardProps {
   price: number | string;
@@ -25,6 +25,7 @@ const Card = ({
   productId,
   bagCount = 0,
   onBagChange,
+  category,
 }: CardProps) => {
   const { cartItems, addToCart, updateQuantity } = useCart();
   const [isButtonDisabled, setIsButtonDisabled] = useState(bagCount > 0);
@@ -69,26 +70,28 @@ const Card = ({
 
   return (
     <div className="relative w-[220px] bg-[#F3F3F3] rounded-[20px] p-[12px] flex flex-col justify-between">
-      <div
-        hidden={!isButtonDisabled || bag === 0}
-        className="absolute w-[196px] h-[196px] rounded-[12px] flex items-center justify-center bg-black opacity-[0.3]"
-      ></div>
-      <div
-        hidden={!isButtonDisabled || bag === 0}
-        className="absolute z-10 w-[196px] h-[196px] flex items-center justify-center bg-none"
-      >
-        <p className="absolute z-10 text-white font-semibold text-[40px]">
-          {bag}
-        </p>
-      </div>
+      <Link href={`/checkout/${category.id}/${productId}`}>
+        <div
+          hidden={!isButtonDisabled || bag === 0}
+          className="absolute w-[196px] h-[196px] rounded-[12px] flex items-center justify-center bg-black opacity-[0.3]"
+        ></div>
+        <div
+          hidden={!isButtonDisabled || bag === 0}
+          className="absolute z-10 w-[196px] h-[196px] flex items-center justify-center bg-none"
+        >
+          <p className="absolute z-10 text-white font-semibold text-[40px]">
+            {bag}
+          </p>
+        </div>
 
-      <Image
-        src={image || "/photo.png"}
-        alt={title}
-        width={196}
-        height={196}
-        className="w-[196px] h-[196px] rounded-[12px] object-cover cursor-pointer"
-      />
+        <Image
+          src={image || "/photo.png"}
+          alt={title}
+          width={196}
+          height={196}
+          className="w-[196px] h-[196px] rounded-[12px] object-cover cursor-pointer"
+        />
+      </Link>
       <div className="max-w-[196px] flex flex-col gap-[4px] p-[8px]">
         <p className="font-bold font-Inter text-[16px]">{price}$</p>
         <p className="font-[400] font-Inter text-[16px]">{title}</p>
