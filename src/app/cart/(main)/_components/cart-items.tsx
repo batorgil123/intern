@@ -38,22 +38,22 @@ export default function CartItems() {
   }
 
   return (
-    <div className="w-full flex flex-col items-center justify-center rounded-[12px] bg-gray-100 p-2 shadow-sm">
+    <div className="w-full flex flex-col items-center justify-center rounded-[12px] bg-white p-2 shadow-sm">
       {cartItems.length === 0 ? (
         <p className="text-gray-500">Сагс хоосон байна</p>
       ) : (
         cartItems.map((item) => (
           <div
             key={item.id}
-            className="w-full flex justify-between items-center rounded-[12px] mb-4 bg-white shadow-sm p-4"
+            className="w-full flex justify-between items-center bg-white border-b border-gray-200 p-4"
           >
             <div className="flex items-center gap-4">
               <Image
                 src={item.image || "/photo.png"}
                 alt={item.title}
-                width={80}
-                height={80}
-                className="rounded-[8px] object-cover"
+                width={96}
+                height={96}
+                className="rounded-[8px] object-cover w-[96px] h-[96px]"
               />
               <div className="flex flex-col gap-2 pb-4">
                 <p className="text-[16px] font-semibold pb-3">{item.price}$</p>
