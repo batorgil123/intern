@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@apollo/client";
-import { AUTH_WITH_JWT_TOKEN } from "@/app/graphql/products";
+import { AuthWithJwtTokenDocument } from "../../../generated/graphql";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,7 +24,7 @@ const Login = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const [login] = useMutation(AUTH_WITH_JWT_TOKEN);
+  const [login] = useMutation(AuthWithJwtTokenDocument);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

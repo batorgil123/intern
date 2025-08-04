@@ -1,13 +1,13 @@
 import CategoryButton from "@/app/_components/category-button";
 import CategorySearch from "@/app/_components/category-search";
 import client from "@/lib/apollo-client";
-import { GET_CATEGORIES } from "@/app/graphql/products";
+import { GetCategoriesDocument } from "../../../../../generated/graphql";
 import { Suspense } from "react";
 
 async function fetchCategories() {
   try {
     const { data } = await client.query({
-      query: GET_CATEGORIES,
+      query: GetCategoriesDocument,
     });
     return data.categories;
   } catch (error) {

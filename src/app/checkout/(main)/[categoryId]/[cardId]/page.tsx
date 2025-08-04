@@ -1,13 +1,20 @@
 import client from "@/lib/apollo-client";
-import { GET_PRODUCTS } from "@/app/graphql/products";
+import { GetProductsDocument, GetProductsQuery } from "../../../../../../generated/graphql";
 import Image from "next/image";
+import Link from "next/link";
 
-async function fetchProducts() {
+async function fetchProducts(): Promise<GetProductsQuery['products']> {
   try {
-    const { data } = await client.query({
-      query: GET_PRODUCTS,
+    const { data, loading, error } = await client.query({
+      query: GetProductsDocument,
     });
-    return data.products;
+    
+    if (error) {
+      console.error("Error fetching products:", error);
+      return [];
+    }
+    
+    return data?.products || [];
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
@@ -19,7 +26,19 @@ const Page = async (props: {
 }) => {
   const { categoryId, cardId } = await props.params;
   const products = await fetchProducts();
-  const product = products.find((product: any) => product.id === cardId);
+  const product = products.find((product) => product.id === cardId);
+  
+  if (!product) {
+    return (
+      <div className="w-full h-screen bg-[#F4F4F4] p-[24px] flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">Product Not Found</h1>
+          <p className="text-gray-600">The product you're looking for doesn't exist.</p>
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div className="w-full h-screen bg-[#F4F4F4] p-[24px] flex flex-col gap-[24px]">
       <div className="flex flex row gap-[21px]">
@@ -69,12 +88,12 @@ const Page = async (props: {
       <div className="flex flex-col gap-[16px] bg-white rounded-[16px] p-[24px]">
         <p className="text-[18px] font-inter font-bold">Санал болгох</p>
         <div className="flex flex-row gap-[16px] mt-[16px]">
-          {products.slice(0, 9).map((item: any) => (
+          {products.slice(0, 9).map((item) => (
             <div
               key={item.id}
               className="flex flex-col gap-[16px] items-start w-[220px]"
             >
-              <a href={`/checkout/${categoryId}/${item.id}`}>
+              <Link href={`/checkout/${categoryId}/${item.id}`}>
                 <Image
                   src={item.images[0] || "/photo.png"}
                   alt={item.title}
@@ -82,7 +101,7 @@ const Page = async (props: {
                   height={196}
                   className="rounded-[12px] h-[196px] w-[196px] cursor-pointer"
                 />
-              </a>
+              </Link>
               <p className="font-bold font-inter text-[16px] ">{item.price}$</p>
               <p className="text-[16px] font-inter font-regular">
                 {item.title}

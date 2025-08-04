@@ -1,5 +1,5 @@
 import client from "@/lib/apollo-client";
-import { GET_PRODUCTS } from "@/app/graphql/products";
+import { GetProductsDocument } from "../../../generated/graphql";
 import CategorySearchClient from "./category-search-client";
 import { Suspense } from "react";
 
@@ -22,7 +22,7 @@ interface SearchProps {
 async function fetchProducts() {
   try {
     const { data } = await client.query({
-      query: GET_PRODUCTS,
+      query: GetProductsDocument,
     });
     return data.products;
   } catch (error) {

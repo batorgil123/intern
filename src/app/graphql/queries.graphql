@@ -1,0 +1,28 @@
+query GetProducts {
+  products {
+    id
+    title
+    price
+    description
+    images
+    category {
+      id
+      name
+      image
+    }
+  }
+}
+
+query GetCategories {
+  categories {
+    id
+    name
+  }
+}
+
+mutation AuthWithJwtToken($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    access_token
+    refresh_token
+  }
+}
