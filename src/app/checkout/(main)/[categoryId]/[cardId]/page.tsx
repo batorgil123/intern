@@ -92,7 +92,10 @@ const Page = async (props: {
       <div className="flex flex-col gap-[16px] bg-white rounded-[16px] p-[24px]">
         <p className="text-[18px] font-inter font-bold">Санал болгох</p>
         <div className="flex flex-row gap-[16px] mt-[16px]">
-          {products.slice(0, 9).map((item) => (
+          {products
+            .filter((item) => item.category !== product.category)
+            .slice(0, 9)
+            .map((item) => (
             <div
               key={item.id}
               className="flex flex-col gap-[16px] items-start w-[220px]"
