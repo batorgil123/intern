@@ -56,10 +56,6 @@ const Card = ({
     addToCart(cartItem);
     setIsButtonDisabled(true);
     setbag(1);
-
-    if (onBagChange) {
-      onBagChange(productId, 1);
-    }
   };
 
   const handleCount = (isAdd: boolean) => {

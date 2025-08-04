@@ -2,6 +2,7 @@ import client from "@/lib/apollo-client";
 import { GetProductsDocument, GetProductsQuery } from "../../../../../../generated/graphql";
 import Image from "next/image";
 import Link from "next/link";
+import AddToBag from "./_components/add-to-bag"; 
 
 async function fetchProducts(): Promise<GetProductsQuery['products']> {
   try {
@@ -76,9 +77,12 @@ const Page = async (props: {
             {product.price}$
           </p>
           <div className="flex flex-col gap-[16px] items-center w-full h-fit">
-            <button className="bg-[#0AAD0A] text-white rounded-[12px] h-[50px] w-[85%] hover:bg-[#0AAD0A]/80 transition duration-300 ease-in-out font-semibold font-inter cursor-pointer">
-              Сагслах
-            </button>
+            <AddToBag
+              price={product.price}
+              title={product.title}
+              image={product.images[0] || "/photo.png"}
+              productId={product.id}
+            />
             <button className="border border-gray-300 rounded-[12px] h-[50px] w-[85%] hover:bg-gray-200 transition duration-300 ease-in-out font-semibold font-inter cursor-pointer">
               Шууд авах
             </button>

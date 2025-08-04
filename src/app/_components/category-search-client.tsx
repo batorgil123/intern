@@ -91,7 +91,6 @@ const CategorySearchClient = ({
                 productId={product.id}
                 category={product.category || { id: "", name: "" }}
                 bagCount={bagCount}
-                onBagChange={() => {}}
               />
             );
           })
