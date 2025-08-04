@@ -30,7 +30,13 @@ const Card = ({
   const { cartItems, addToCart, updateQuantity } = useCart();
   const [isButtonDisabled, setIsButtonDisabled] = useState(bagCount > 0);
   const [bag, setbag] = useState(bagCount);
-  const currentCartItem = cartItems.find((item: any) => item.id === productId);
+  const currentCartItem = cartItems.find((item: {
+    id: String;
+    title: String;
+    price: number;
+    image: string;
+    quantity: number;
+  }) => item.id === productId);
   const currentBagCount = currentCartItem ? currentCartItem.quantity : 0;
 
   useEffect(() => {

@@ -12,7 +12,7 @@ interface CategoryButtonProps {
 
 export default function CategoryButton({ names, currentCategoryId }: CategoryButtonProps) {
   return (
-    <div className="w-full h-full flex flex-col gap-3 overflow-y-auto">
+    <div className="w-full h-fit flex flex-col gap-3 overflow-y-auto">
       {names.map((category) => {
         const isActive = currentCategoryId === category.id;
         return (

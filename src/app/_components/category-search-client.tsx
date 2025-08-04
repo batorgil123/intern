@@ -8,7 +8,7 @@ import { useCart } from "@/lib/utils";
 interface Product {
   id: string;
   title: string;
-  price: number | string;
+  price: number;
   images?: string[];
   category?: {
     id: string;
@@ -73,7 +73,13 @@ const CategorySearchClient = ({
           <p className="text-gray-500">No products found.</p>
         ) : (
           filteredProducts.map((product: Product) => {
-            const cartItem = cartItems.find((item: any) => item.id === product.id);
+            const cartItem = cartItems.find((item: {
+              id: String;
+              title: String;
+              price: number;
+              image: string;
+              quantity: number;
+            }) => item.id === product.id);
             const bagCount = cartItem ? cartItem.quantity : 0;
             
             return (
