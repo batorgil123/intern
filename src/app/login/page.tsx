@@ -45,7 +45,8 @@ const Login = () => {
         setShowSuccessDialog(true);
       }
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? err.message : "Нэвтрэхэд алдаа гарлаа.";
+      const errorMessage =
+        err instanceof Error ? err.message : "Нэвтрэхэд алдаа гарлаа.";
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -115,4 +116,4 @@ const Login = () => {
   );
 };
 
-export default Login; 
+export default Login;

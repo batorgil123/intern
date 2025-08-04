@@ -6,7 +6,7 @@ import { useCart } from "@/lib/utils";
 import Link from "next/link";
 
 interface CardProps {
-  price: number | string;
+  price: number;
   title: string;
   image: string;
   category: {

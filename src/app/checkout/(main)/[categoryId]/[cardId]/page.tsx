@@ -5,7 +5,7 @@ import Link from "next/link";
 
 async function fetchProducts(): Promise<GetProductsQuery['products']> {
   try {
-    const { data, loading, error } = await client.query({
+    const { data, error } = await client.query({
       query: GetProductsDocument,
     });
     

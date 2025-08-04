@@ -1,15 +1,22 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 // Custom hook for cart management
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export const useCart = () => {
-  const [cartItems, setCartItems] = useState<any[]>([]);
+  type CartItem = {
+    id: string;
+    title: string;
+    price: number;
+    image: string;
+    quantity: number;
+  };
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [cartCount, setCartCount] = useState(0);
 
   const updateCart = () => {
@@ -17,7 +24,10 @@ export const useCart = () => {
     if (savedItems) {
       const items = JSON.parse(savedItems);
       setCartItems(items);
-      const totalCount = items.reduce((sum: number, item: any) => sum + item.quantity, 0);
+      const totalCount = items.reduce(
+        (sum: number, item: any) => sum + item.quantity,
+        0
+      );
       setCartCount(totalCount);
     } else {
       setCartItems([]);
@@ -28,12 +38,9 @@ export const useCart = () => {
   useEffect(() => {
     updateCart();
 
-    // Listen for storage changes
     const handleStorageChange = () => {
       updateCart();
     };
-
-    // Listen for custom cart update events
     const handleCartUpdate = () => {
       updateCart();
     };
@@ -47,11 +54,25 @@ export const useCart = () => {
     };
   }, []);
 
-  const addToCart = (item: any) => {
+  const addToCart = (item: {
+    id: String;
+    title: String;
+    price: number;
+    image: string;
+    quantity: number;
+  }) => {
     const existingItems = localStorage.getItem("cartItems");
     let cartItems = existingItems ? JSON.parse(existingItems) : [];
 
-    const existingItemIndex = cartItems.findIndex((cartItem: any) => cartItem.id === item.id);
+    const existingItemIndex = cartItems.findIndex(
+      (cartItem: {
+        id: String;
+        title: String;
+        price: number;
+        image: string;
+        quantity: number;
+      }) => cartItem.id === item.id
+    );
     if (existingItemIndex !== -1) {
       cartItems[existingItemIndex].quantity += 1;
     } else {
@@ -66,7 +87,15 @@ export const useCart = () => {
     const existingItems = localStorage.getItem("cartItems");
     let cartItems = existingItems ? JSON.parse(existingItems) : [];
 
-    const existingItemIndex = cartItems.findIndex((item: any) => item.id === productId);
+    const existingItemIndex = cartItems.findIndex(
+      (item: {
+        id: String;
+        title: String;
+        price: number;
+        image: string;
+        quantity: number;
+      }) => item.id === productId
+    );
     if (existingItemIndex !== -1) {
       if (newQuantity <= 0) {
         cartItems.splice(existingItemIndex, 1);
@@ -83,7 +112,15 @@ export const useCart = () => {
     const existingItems = localStorage.getItem("cartItems");
     let cartItems = existingItems ? JSON.parse(existingItems) : [];
 
-    const filteredItems = cartItems.filter((item: any) => item.id !== productId);
+    const filteredItems = cartItems.filter(
+      (item: {
+        id: String;
+        title: String;
+        price: number;
+        image: string;
+        quantity: number;
+      }) => item.id !== productId
+    );
     localStorage.setItem("cartItems", JSON.stringify(filteredItems));
     window.dispatchEvent(new Event("cartUpdated"));
   };
@@ -100,6 +137,6 @@ export const useCart = () => {
     updateQuantity,
     removeFromCart,
     clearCart,
-    updateCart
+    updateCart,
   };
 };
