@@ -67,7 +67,7 @@ export const useCart = () => {
     quantity: number;
   }) => {
     const existingItems = localStorage.getItem("cartItems");
-    let cartItems = existingItems ? JSON.parse(existingItems) : [];
+    const cartItems = existingItems ? JSON.parse(existingItems) : [];
 
     const existingItemIndex = cartItems.findIndex(
       (cartItem: {
@@ -90,7 +90,7 @@ export const useCart = () => {
 
   const updateQuantity = (productId: string, newQuantity: number) => {
     const existingItems = localStorage.getItem("cartItems");
-    let cartItems = existingItems ? JSON.parse(existingItems) : [];
+    const cartItems = existingItems ? JSON.parse(existingItems) : [];
 
     const existingItemIndex = cartItems.findIndex(
       (item: {
@@ -115,7 +115,7 @@ export const useCart = () => {
 
   const removeFromCart = (productId: string) => {
     const existingItems = localStorage.getItem("cartItems");
-    let cartItems = existingItems ? JSON.parse(existingItems) : [];
+    const cartItems = existingItems ? JSON.parse(existingItems) : [];
 
     const filteredItems = cartItems.filter(
       (item: {

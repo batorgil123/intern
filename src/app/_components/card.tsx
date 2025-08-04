@@ -15,7 +15,7 @@ interface CardProps {
   };
   productId: string;
   bagCount?: number;
-  onBagChange?: (productId: string, count: number) => void;
+
 }
 
 const Card = ({
@@ -24,7 +24,7 @@ const Card = ({
   image,
   productId,
   bagCount = 0,
-  onBagChange,
+
   category,
 }: CardProps) => {
   const { cartItems, addToCart, updateQuantity } = useCart();
@@ -62,11 +62,11 @@ const Card = ({
     if (isAdd) {
       updateQuantity(productId, currentBagCount + 1);
       setbag(currentBagCount + 1);
-      onBagChange && onBagChange(productId, currentBagCount + 1);
+     
     } else if (currentBagCount > 0) {
       updateQuantity(productId, currentBagCount - 1);
       setbag(currentBagCount - 1);
-      onBagChange && onBagChange(productId, currentBagCount - 1);
+
     }
   };
 
