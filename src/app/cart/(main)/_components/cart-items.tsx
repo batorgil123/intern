@@ -47,9 +47,12 @@ export default function CartItems() {
                 height={96}
                 className="rounded-[8px] object-cover w-[96px] h-[96px]"
               />
+
               <div className="flex flex-col gap-2 pb-4">
                 <p className="text-[16px] font-semibold pb-3">{item.price}$</p>
-                <h3 className="font-regular font-inter text-[16px]">{item.title}</h3>
+                <h3 className="font-regular font-inter text-[16px]">
+                  {item.title}
+                </h3>
               </div>
             </div>
 

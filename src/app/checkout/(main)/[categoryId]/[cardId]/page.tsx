@@ -1,12 +1,13 @@
 import client from "@/lib/apollo-client";
-import {
-  GetProductsDocument,
-  GetProductsQuery,
-} from "../../../../../../generated/graphql";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import AddToBag from "./_components/add-to-bag";
+import { Spinner } from "@heroui/spinner";
+import {
+  GetProductsDocument,
+  GetProductsQuery,
+} from "../../../../../../generated/graphql";
 
 async function fetchProducts(): Promise<GetProductsQuery["products"]> {
   try {
@@ -50,7 +51,7 @@ const Page = async (props: {
 
   return (
     <div className="w-full h-screen bg-[#F4F4F4] p-[24px] flex flex-col gap-[24px]">
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Spinner />}>
         <div className="flex flex row gap-[21px]">
           <p className="text-[#7E7E83] text-[14px] font-inter font-semibold">
             Бөөндье

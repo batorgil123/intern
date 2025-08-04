@@ -2,12 +2,13 @@ import CartItems from "./_components/cart-items";
 import CartClientWrapper from "./_components/cart-client-wrapper";
 import CartHeader from "./_components/cart-header";
 import { Suspense } from "react";
+import { Spinner } from "@heroui/spinner";
 
 export default function CartPage() {
   return (
     <div className="w-full  bg-[#F4F4F4] flex flex-col">
       <div className="w-full px-[28px] flex flex-col items-center justify-center p-8">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Spinner />}>
           <CartHeader />
         </Suspense>
         <div className="w-full flex flex-row justify-between">
