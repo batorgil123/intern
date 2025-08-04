@@ -51,7 +51,7 @@ const Page = async (props: {
 
   return (
     <div className="w-full h-screen bg-[#F4F4F4] p-[24px] flex flex-col gap-[24px]">
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<Spinner size="lg" />}>
         <div className="flex flex row gap-[21px]">
           <p className="text-[#7E7E83] text-[14px] font-inter font-semibold">
             Бөөндье
