@@ -5,14 +5,6 @@ import Image from "next/image";
 import { useCart } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
 
-interface CartItem {
-  id: string;
-  title: string;
-  price: number | string;
-  image: string;
-  quantity: number;
-}
-
 export default function CartItems() {
   const { cartItems, updateQuantity, removeFromCart } = useCart();
   const [isClient, setIsClient] = useState(false);

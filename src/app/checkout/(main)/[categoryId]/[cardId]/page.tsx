@@ -33,7 +33,7 @@ const Page = async (props: {
       <div className="w-full h-screen bg-[#F4F4F4] p-[24px] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Product Not Found</h1>
-          <p className="text-gray-600">The product you're looking for doesn't exist.</p>
+          <p className="text-gray-600">The product you are looking for does not exist.</p>
         </div>
       </div>
     );

@@ -3,17 +3,6 @@ import { GetProductsDocument } from "../../../generated/graphql";
 import CategorySearchClient from "./category-search-client";
 import { Suspense } from "react";
 
-interface Product {
-  id: string;
-  title: string;
-  price: number | string;
-  images?: string[];
-  category?: {
-    id: string;
-    name: string;
-  };
-}
-
 interface SearchProps {
   selectedCategoryId: string | null;
   selectedCategoryName?: string | null;

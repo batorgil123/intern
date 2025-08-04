@@ -5,7 +5,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// Custom hook for cart management
 import { useState, useEffect } from "react";
 
 export const useCart = () => {
@@ -25,7 +24,13 @@ export const useCart = () => {
       const items = JSON.parse(savedItems);
       setCartItems(items);
       const totalCount = items.reduce(
-        (sum: number, item: any) => sum + item.quantity,
+        (sum: number, item: {
+          id: String;
+          title: String;
+          price: number;
+          image: string;
+          quantity: number;
+        }) => sum + item.quantity,
         0
       );
       setCartCount(totalCount);
