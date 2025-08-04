@@ -31,8 +31,8 @@ const Card = ({
   const [isButtonDisabled, setIsButtonDisabled] = useState(bagCount > 0);
   const [bag, setbag] = useState(bagCount);
   const currentCartItem = cartItems.find((item: {
-    id: String;
-    title: String;
+    id: string;
+    title: string;
     price: number;
     image: string;
     quantity: number;

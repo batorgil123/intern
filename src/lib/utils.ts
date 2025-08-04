@@ -25,8 +25,8 @@ export const useCart = () => {
       setCartItems(items);
       const totalCount = items.reduce(
         (sum: number, item: {
-          id: String;
-          title: String;
+          id: string;
+          title: string;
           price: number;
           image: string;
           quantity: number;
@@ -60,8 +60,8 @@ export const useCart = () => {
   }, []);
 
   const addToCart = (item: {
-    id: String;
-    title: String;
+    id: string;
+    title: string;
     price: number;
     image: string;
     quantity: number;
@@ -71,8 +71,8 @@ export const useCart = () => {
 
     const existingItemIndex = cartItems.findIndex(
       (cartItem: {
-        id: String;
-        title: String;
+        id: string;
+        title: string;
         price: number;
         image: string;
         quantity: number;
@@ -94,8 +94,8 @@ export const useCart = () => {
 
     const existingItemIndex = cartItems.findIndex(
       (item: {
-        id: String;
-        title: String;
+        id: string;
+        title: string;
         price: number;
         image: string;
         quantity: number;
@@ -119,8 +119,8 @@ export const useCart = () => {
 
     const filteredItems = cartItems.filter(
       (item: {
-        id: String;
-        title: String;
+        id: string;
+        title: string;
         price: number;
         image: string;
         quantity: number;

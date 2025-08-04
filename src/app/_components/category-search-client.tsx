@@ -74,8 +74,8 @@ const CategorySearchClient = ({
         ) : (
           filteredProducts.map((product: Product) => {
             const cartItem = cartItems.find((item: {
-              id: String;
-              title: String;
+              id: string;
+              title: string;
               price: number;
               image: string;
               quantity: number;
